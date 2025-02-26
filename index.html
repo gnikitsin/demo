@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор белка</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .calculator {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .calculator h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .calculator label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .calculator input, .calculator select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .calculator button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .calculator button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Калькулятор белка</h2>
+        <label for="weight">Ваш вес (кг):</label>
+        <input type="number" id="weight" placeholder="Введите ваш вес">
+        
+        <label for="activity">Уровень активности:</label>
+        <select id="activity">
+            <option value="1.2">Сидячий образ жизни</option>
+            <option value="1.375">Умеренная активность</option>
+            <option value="1.55">Высокая активность</option>
+        </select>
+        
+        <label for="goal">Цель:</label>
+        <select id="goal">
+            <option value="0.8">Поддержание веса</option>
+            <option value="1.2">Похудение</option>
+            <option value="1.6">Набор мышц</option>
+        </select>
+        
+        <button onclick="calculateProtein()">Рассчитать</button>
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateProtein() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+            const goal = parseFloat(document.getElementById('goal').value);
+            
+            if (isNaN(weight) || weight <= 0) {
+                alert("Пожалуйста, введите корректный вес.");
+                return;
+            }
+            
+            const protein = (weight * goal * activity).toFixed(2);
+            document.getElementById('result').innerText = `Ваша норма белка: ${protein} г/день`;
+        }
+    </script>
+</body>
+</html>
